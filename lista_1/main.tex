@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{siunitx}
+\input{commands}
+
+\author{Leonardo Mendes de Moraes }
+\title{Lista de Exercícios - MAC5711}
+\date{}
+\begin{document}
+
+%%--CABEÇALHO--%%
+	\begin{center}
+    {\huge Lista 1 \par} {\LARGE Análise de Algoritmos \par} {\Large MAC5711
+    \par}
+	\end{center}
+
+\problem
+    \subproblem{b} $\log_{10} n$ é O($\lg n$) 
+        \answer Para $n \geq 1$ e $c_1 =
+        \log_{10} 2$ temos que: \\
+        $\log_{10} n \leq \log_{10}2
+        \lg n$ \\
+        $\log_{10} n \leq \log_{10}2 . \frac{\log_{10}n}{\log_{10}2}$ \\
+        $\log_{10} n \leq \log_{10}n$.
+
+
+\problem
+	\subproblem{d} $n = O(2^n)$
+        \answer Para todo $n_0 = 0$ e $c_1 = 1$ onde $n \geq n_0$, temos que
+        $0 \leq n \leq 2^n$.
+\problem
+    \subproblem{b} Se $f(n) =  \Theta(g(n))$ e $g(n) = \Theta(h(n))$ então $f(n)
+    = \Theta(h(n))$.
+        \answer Temos que $f(n) = \Theta(g(n))$ quando $f(n) =
+        O(g(n))$ e $f(n) = \Omega(g(n))$:
+        \begin{equation}
+            c_1 g(n) \leq f(n) \leq c_2 g(n)
+        \end{equation}
+        E $g(n) = \Theta(h(n))$ quando $g(n) =
+        O(h(n))$ e $g(n) = \Omega(h(n))$
+        \begin{equation}
+            c_3 h(n) \leq g(n) \leq c_4 h(n)
+        \end{equation}
+        $f(n) = \Theta(h(n))$ é verdadeiro pois se (1) e (2), existe um $c_1$, $c_2$, $c_3$ e $c_4$ em que temos: 
+        \begin{equation}
+            c_3 h(n) \leq  c_2 g(n) \leq f(n) \leq  c_2 g(n) \leq c_4 h(n) \nonumber
+        \end{equation}
+        \begin{equation}
+            c_3 h(n) \leq f(n) \leq c_4 h(n) \nonumber
+        \end{equation}
+        Logo, $f(n)$ é $\Theta(h(n))$.
+
+\end{document}
