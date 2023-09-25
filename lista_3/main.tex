@@ -1,0 +1,52 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{listings}
+
+\input{commands}
+
+
+\author{Leonardo Mendes de Moraes }
+\title{Lista 3 - MAC5711}
+\date{}
+\begin{document}
+
+%%--CABEÇALHO--%%
+	\begin{center}
+    {\huge Lista 3 \par} {\LARGE Análise de Algoritmos \par} {\Large MAC5711
+    \par}
+	\end{center}
+
+\problem
+    \begin{lstlisting}
+Algoritmo MaiorMenor (v, n)
+    maior <- v[1]
+    menor <- v[1]
+    para i <- 2 ate n faca
+        se v[i] > maior
+            entao maior <- v[i]
+            senao se v[i] < menor
+                entao menor <- v[i]
+    devolva maior, menor
+        \end{lstlisting}
+    \subproblem{} Qual é o número esperado de comparações executadas na linha 6
+    do algoritmo?
+
+    \begin{equation} \label{eq1}
+        \begin{split}
+        T(n) & = 2(2T(n/2^2) + C(n/2)^2) + Cn^2 = 2^2T(n/2^2) + Cn^2/2 + Cn^2 \\
+         & = 2^2(2T(n/2^3) + C(n/2^2)^2) + Cn^2(1 + 1/2)
+        \end{split}
+        \notag
+        \end{equation}
+
+\problem
+
+\end{document}
