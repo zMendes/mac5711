@@ -2,7 +2,7 @@
 \newcounter{subprob}
 \renewcommand{\thesubprob}{\alph{subprob}}
 
-\newcommand{\problem}{\setcounter{subprob}{0} \stepcounter{prob} \par \medskip \noindent \textbf{\theprob \ .}}
+\newcommand{\problem}[1]{\setcounter{subprob}{0} \stepcounter{prob} \par \medskip \noindent \textbf{#1 \ .}}
 
 \newcommand{\answer}{\par \medskip \noindent \textit{\textbf{prova} \ }}
 

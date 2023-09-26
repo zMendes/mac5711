@@ -24,7 +24,7 @@
     \par}
 	\end{center}
 
-\problem
+\problem{1}
     \begin{lstlisting}
 Algoritmo MaiorMenor (v, n)
     maior <- v[1]
@@ -36,17 +36,170 @@ Algoritmo MaiorMenor (v, n)
                 entao menor <- v[i]
     devolva maior, menor
         \end{lstlisting}
-    \subproblem{} Qual é o número esperado de comparações executadas na linha 6
+    \subproblem{a} Qual é o número esperado de comparações executadas na linha 6
     do algoritmo?
 
-    \begin{equation} \label{eq1}
+    A linha \verb|6| somente é executada se a primeira condição da linha
+    \verb|4| não for verdadeira. Portanto, para saber quantas vezes a linha
+    \verb|6| é executada, deve ser calculada a quantidade de vezes que a linha
+    \verb|5| é executada primemiro.
+
+    Considere que: $X(v, n) = \text{número de execuções da linha 5}$.
+
+    \begin{equation}
+        E[X] = \Sigma_{s \in S} X(s) \cdot Pr(s) \\
+        \notag
+    \end{equation}
+    \begin{equation}
+        X_i =
+            \begin{cases}
+                1 & \text{se $v[i]$ > maior}\\
+                0 & \text{caso contrário}
+            \end{cases}
+            \notag
+    \end{equation}
+    \begin{multline}
+        \therefore E[X_i] = \text{probabilidade que $A[i]$ seja o valor máximo em $A[1...i]$}
+        = \frac{1}{i} \\
         \begin{split}
-        T(n) & = 2(2T(n/2^2) + C(n/2)^2) + Cn^2 = 2^2T(n/2^2) + Cn^2/2 + Cn^2 \\
-         & = 2^2(2T(n/2^3) + C(n/2^2)^2) + Cn^2(1 + 1/2)
+        E[X] &= E[X_i + ... + X_n] = E[X_1] + .. + E[X_n] = \frac{1}{1} + ... + \frac{1}{n} \\
+            &< 1 + \ln n = \Theta(\lg n)
+    \end{split}
+    \notag
+    \end{multline}
+    Achado o número de execuções da linha \verb|5|, para achar o da linha
+    \verb|6| é o número de vezes que o laço é executado menos o número de
+    execuções da \verb|5|. Se o laço executa \emph{n} vezes e a linha \verb|5|
+    executa $\Theta(\lg n)$ vezes, pode-se concluir que o número de execuções da
+    linha \verb|6| é:
+    \begin{equation}
+    \Theta(n) -\Theta(\lg n) = \Theta(n - \lg n)
+    \notag
+    \end{equation}
+
+    \subproblem{b} Qual é o número esperado de atribuições efetuadas na linha 7 do algoritmo?
+    \begin{multline}
+        X(v, n) = \text{número de execuções da linha 7} \\
+        E[X] = \Sigma_{s \in S} X(s) \cdot Pr(s) \\
+        \notag
+    \end{multline}
+    Dividindo o problema em $X_i$:
+    \begin{equation}
+        X_i =
+            \begin{cases}
+                1 & \text{se $v[i] < maior$ e $v[i] < menor$} \\
+                0 & \text{caso não.} \\
+            \end{cases}
+    \notag
+    \end{equation}
+    O $v[i] < maior$ é o inverso do cálculo da linha \verb|5|. Pois para $X_i$
+    ser executado, é necessário que não entre na condição da linha \verb|4| e
+    que a condição da linha \verb|6| seja verdadeira. Portanto:
+    \begin{multline}
+        X_i = \frac{i-1}{i} \cdot \frac{1}{i} = \frac{i-1}{i^2} = \frac{1}{i} - \frac{1}{i^2} \\
+        \begin{split}
+        E[X] &= (\frac{1}{1} - \frac{1}{1} ) + (\frac{1}{2} - \frac{1}{4}) + (\frac{1}{3} - \frac{1}{9}) + ... + (\frac{1}{n} - \frac{1}{n^2}) \\
+            & = \Sigma_{i=1}^n \frac{1}{i} + {\Sigma_{i=1}^n \frac{-1}{i^2} }
         \end{split}
         \notag
-        \end{equation}
+    \end{multline}
+    As duas somatórias podem ser consideradas séries harmônicas. Resolvendo a
+    primeira, como visto anteriormente:
+    \begin{equation}
+        \Sigma_{i=1}^n \frac{1}{i} < \ln + 1 = \Theta(\lg n)
+        \notag
+    \end{equation}
+    A segunda somatória é uma série que pode ser simplificada por:
+    \begin{equation}
+        \begin{split}
+        \Sigma_{i=1}^n \frac{-1}{i^2} &= \frac{-1}{1} + \frac{-1}{4} - \frac{-1}{9} + \frac{-1}{16} + .. + \frac{-1}{n^2} \\
+            &< \underbrace{1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} + ... }_{\text{Série Hamônica alternada} } < \ln 2 \\
+        \end{split}
+        \notag
+    \end{equation}
+    A série harmônica alternada converge em um valor, portanto:
+    \begin{equation}
+        \Sigma_{i=1}^n \frac{1}{i} + \Sigma_{i=1}^n \frac{-1}{i^2} = \theta(\lg n)
+        \notag
+    \end{equation}
+    Então, o número esperado de atribuições é $\Theta(\lg n)$ para a linha
+\verb|7|. \problem{3} Para esta questão, vamos dizer que a mediana de um vetor
+A[p . . r] com número inteiros é o valor que ficaria na posição $A[\lfloor(p + r)/2\rfloor]$
+depois que o vetor $A[p . . r]$ fosse ordenado. Dado um algoritmo linear
+“caixa-preta” que devolve a mediana de um vetor, descreva um algoritmos, linear,
+que, dado um vetor $A[p . . r]$ de inteiros distintos e um inteiro k, devolve o
+k-ésimo menor do vetor. (O k-ésimo menor de um vetor de inteiros distintos é o
+elemento que estaria na k-ésima posição do vetor se ele fosse ordenado). Você
+pode assumir que o vetor tem tamanho igual uma potência de 2.
+\begin{lstlisting}[numbers=left,
+    stepnumber=1,]
+kEsimoTermo(A, p, r, k):
+    valor_mediana = mediana(A, p, r)
+    esquerda = [elementos de A < valor_mediana]
+    direita = [elementos de A > valor_mediana]
+    k_Atual = len(esquerda)
+    se k <= k_Atual:
+        retorna kEsimoTermo(esquerda, 0, k_Atual - 1, k)
+        senao se k >= k_Atual:
+            retorna kEsimoTermo(direita, 0, len(direita), k - k_Atual)
+    retorna valor_mediana
+\end{lstlisting}
+O algoritmo funciona da seguinte maneira: obtem o valor da mediana. A partir
+dela, cria-se uma lista com todos os valores menores que a mediana e uma outra
+lista com todos os valores maiores. Com isso, é possível saber a posição exata
+da mediana e comparar o valor de $k$ recebido na função com o tamanho das duas
+listas.
 
-\problem
+Se \verb|k| for menor que o índice atual da mediana significa que o
+\emph{k-Ésimo} elemento está na lista da esquerda. Chama e retorna recursivamente a função
+passando a lista dos valores menores que a mediana.
 
+Se \verb|k| for maior que o índice atual da mediana significa que o seu elemento está
+na lista dos elementos maiores que a mediana, portanto retorna o valor obtido da chamada da função
+recursivamente com o vetor dos valores maiores. No entanto, temos que atualizar
+o valor do arguemtno \verb|k|, subtraindo o número total de elementos que serão
+ignorados da lista \verb|esquerda|. Por fim, se \verb|k| não é nem maior nem menor que \verb|k_Atual| significa que
+encontramos o \emph{k-ésimo} valor, portanto o valor da mediana do vetor atual é
+retornado.
+
+Considerando $T(n)$ como a função de tempo do algoritmo, temos:
+
+
+\begin{lstlisting}[numbers=left,
+    stepnumber=1,escapeinside={(*}{*)}]
+    (*$\Theta(N)$*)
+    (*$\Theta(N)$*)
+    (*$\Theta(N)$*)
+    (*$\Theta(1)$*)
+    (*$\Theta(1)$*)
+    (*$T(\frac{n}{2})$*)
+    (*$T(\frac{n}{2})$*)
+    (*$\Theta(1)$*)
+
+\end{lstlisting}
+
+Portanto, pode-se definir a função $T(n)$ como:
+\begin{equation}
+    T(n) = T(\frac{n}{2}) + n
+    \notag
+\end{equation}
+\begin{equation}
+    \begin{split}
+        T(n) &= T(\frac{n}{2}) + n \\
+        &= T(\frac{n}{4}) + n(1+\frac{1}{2}) \\
+        &= T(\frac{n}{8}) + n(1 +\frac{1}{2} + \frac{1}{4}) \\
+        &\vdots\\
+        &= T(\frac{n}{2^k}) + n\underbrace{(1+\frac{1}{2}+\frac{1}{4} + ... + \frac{1}{2^{k-1}})}_{\text{Soma de P.G.}}
+    \end{split}
+    \notag
+\end{equation}
+Igualando $k = \lg n$, temos:
+\begin{equation}
+    \begin{split}
+    T(n) &= T(1) + n(1+\frac{1}{2}+\frac{1}{4} + ... + \frac{1}{2^{\lg n -1}}) \\
+        &= 1+ 2n - 2 \\
+        &= \Theta(n)
+    \end{split}
+    \notag
+\end{equation}
 \end{document}
