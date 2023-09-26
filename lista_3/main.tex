@@ -135,12 +135,12 @@ pode assumir que o vetor tem tamanho igual uma potência de 2.
     stepnumber=1,]
 kEsimoTermo(A, p, r, k):
     valor_mediana = mediana(A, p, r)
-    esquerda = [elementos de A < valor_mediana]
-    direita = [elementos de A > valor_mediana]
+    esquerda = [elementos de A <= valor_mediana]
+    direita = [elementos de A >= valor_mediana]
     k_Atual = len(esquerda)
-    se k <= k_Atual:
+    se k < k_Atual:
         retorna kEsimoTermo(esquerda, 0, k_Atual - 1, k)
-        senao se k >= k_Atual:
+        senao se k > k_Atual:
             retorna kEsimoTermo(direita, 0, len(direita), k - k_Atual)
     retorna valor_mediana
 \end{lstlisting}
