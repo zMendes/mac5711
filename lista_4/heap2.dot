@@ -1,0 +1,27 @@
+graph G {
+    node [shape=circle];
+    51 [label="51 (1)"];
+    46 [label="46 (2)"];
+    41 [label="41 (3)", style=filled, fillcolor="lightpink"];
+    27 [label="27 (4)"];
+    37 [label="37 (5)", style=filled, fillcolor="lightpink"];
+    35 [label="35 (6)"];
+    31 [label="31 (7)"];
+    23 [label="23 (8)"];
+    25 [label="25 (9)"];
+    21 [label="21 (10)"];
+    10 [label="10 (11)"];
+    28 [label="28 (12)"];
+
+    51 -- 46;
+    51 -- 41;
+    46 -- 27;
+    46 -- 37;
+    41 -- 35;
+    41 -- 31;
+    27 -- 23;
+    27 -- 25;
+    37 -- 21;
+    37 -- 10;
+    35 -- 28;
+}
