@@ -1,0 +1,56 @@
+0: 1 4
+1: 2 5
+2: 3
+3: 7
+4: 8
+5: 4
+6: 5 10 2
+7: 11 6
+8: 9
+9: 5 8
+10: 9
+11: 10
+
+
+
+-----
+    0   1   2   3   4   5   6   7   8   9   10  11
+d   0   1   2   3   9   8   17  4  10   7   6   5
+f   23  22  21  20 12   13  18  19 11   14  15  16
+
+
+
+
+13 ------
+
+generic(G)
+	for u in G(V):
+		color[u] = branco
+		parent[u] = nill
+	tempo =0
+
+	for u in G(V):
+		if color[u] == branco:
+			gerico_visit(u)
+		
+
+
+generico_visit(u):
+	
+	tempo = tempo + 1
+	d[u] = tempo
+	color[u] = cinza
+	for v in u.adj:
+		parent[v] = u
+		Q.add(v)
+	while Q != []:
+		v = Q.pop()
+		if color[v] == branco
+			generico_visit(v)
+	tempo = tempo + 1
+	f[u] = tempo		
+	color[u] = preto
+	
+	
+	
+	
